@@ -7,7 +7,7 @@ import com.rahul.devops.domain.Login;
 import com.rahul.devops.repository.LoginRepository;
 
 @Service
-public class LoginService {
+public class AuthService {
 
     @Autowired
     LoginRepository loginRepository;
@@ -18,5 +18,13 @@ public class LoginService {
             return found.getUsername();
         }
         return "Invalid username or password";
+    }
+
+    public String handleRegister(Login login) {
+        Login registered = loginRepository.save(login);
+        if(registered != null) {
+            return "Registered successfully";
+        };
+        return "Error in Registration";
     }
 }
