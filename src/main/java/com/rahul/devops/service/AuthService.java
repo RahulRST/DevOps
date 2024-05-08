@@ -3,25 +3,25 @@ package com.rahul.devops.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rahul.devops.domain.Login;
-import com.rahul.devops.repository.LoginRepository;
+import com.rahul.devops.domain.Auth;
+import com.rahul.devops.repository.AuthRepository;
 
 @Service
 public class AuthService {
 
     @Autowired
-    LoginRepository loginRepository;
+    AuthRepository authRepository;
 
-    public String handleLogin(Login login) {
-        Login found = loginRepository.findByUsernameAndPassword(login.getUsername(),login.getPassword());
+    public String handleLogin(Auth login) {
+        Auth found = authRepository.findByUsernameAndPassword(login.getUsername(),login.getPassword());
         if(found != null) {
             return found.getUsername();
         }
         return "Invalid username or password";
     }
 
-    public String handleRegister(Login login) {
-        Login registered = loginRepository.save(login);
+    public String handleRegister(Auth login) {
+        Auth registered = authRepository.save(login);
         if(registered != null) {
             return "Registered successfully";
         };
